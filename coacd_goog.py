@@ -25,21 +25,21 @@ def create_mesh(args):
         coacd_exec,
         "-i", obj_file,
         "-o", obj_out_file,
-        "-t", "0.2"
+        "-t", "0.4"
     ], stdout=subprocess.DEVNULL)
-    glb_file = obj_out_file.with_suffix(".glb")
-    subprocess.call([
-        "assimp", "export",
-        obj_out_file, glb_file
-    ], stdout=subprocess.DEVNULL)
-    assert glb_file.is_file()
-    obj_out_file.unlink()
+    assert obj_out_file.is_file()
+    # glb_file = obj_out_file.with_suffix(".glb")
+    # subprocess.call([
+    #     "assimp", "export",
+    #     obj_out_file, glb_file,
+    #     "-fglb2"
+    # ], stdout=subprocess.DEVNULL)
+    # assert glb_file.is_file()
+    # obj_out_file.unlink()
 
 def main(args):
-    # import pdb
-    # pdb.set_trace()
     objs_path: Path = args.objs_path
-    obj_dirs = objs_path.glob("*")
+    obj_dirs = sorted(objs_path.glob("*"))
     args = [(obj_dir, args.out_path, args.coacd_exec) for obj_dir in obj_dirs]
     # for obj_dir in tqdm(obj_dirs):
     #     create_mesh((obj_dir, args.out_path, args.coacd_exec))

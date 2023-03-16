@@ -15,7 +15,7 @@ def convert_object(from_file, to_file):
         "assimp", "export",
         from_file, to_file
     ], stdout=subprocess.DEVNULL)
-    assert to_file.is_file()
+    assert to_file.is_file(), f"conversion failed on file {from_file}"
 
 def create_mesh(args):
     object_glb_file: Path
@@ -23,24 +23,27 @@ def create_mesh(args):
     object_glb_file, out_dir, coacd_exec = args
     out_dir.mkdir(parents=True, exist_ok=True)
 
+    object_name = object_glb_file.stem
+    coll_obj_file = out_dir/(object_name + ".obj")
+    if coll_obj_file.is_file() or object_name in {"B07GFG117Y", "B07BWL248S", "B07BW8QTX1"}:
+        return
+
     object_obj_file = object_glb_file.with_suffix(".obj")
     convert_object(object_glb_file, object_obj_file)
 
-    object_name = object_glb_file.stem
-    coll_obj_file = out_dir/(object_name + ".obj")
     subprocess.call([
         coacd_exec,
         "-i", object_obj_file,
         "-o", coll_obj_file,
         "-l", "/dev/null",
-        "-t", "0.2"
+        "-t", "0.4"
     ], stdout=subprocess.DEVNULL)
-    assert coll_obj_file.is_file()
+    assert coll_obj_file.is_file(), f"coacd failed on file {object_obj_file}"
 
-    coll_glb_file = coll_obj_file.with_suffix(".glb")
-    convert_object(coll_obj_file, coll_glb_file)
+    # coll_glb_file = coll_obj_file.with_suffix(".glb")
+    # convert_object(coll_obj_file, coll_glb_file)
 
-    coll_obj_file.unlink()
+    # coll_obj_file.unlink()
     coll_obj_file.with_suffix(".wrl").unlink()
     object_obj_file.unlink()
     object_obj_file.with_suffix(".mtl").unlink()
