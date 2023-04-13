@@ -1,0 +1,86 @@
+super_category,main_category,wnsynsetkey,exclude,notes,Notes from Karmesh
+seating_furniture,chair,chair.n.01,,receptacle,Receptacle
+seating_furniture,couch,sofa.n.01,,receptacle,Receptacle
+seating_furniture,bench,bench.n.01,,receptacle,Receptacle
+plant,potted_plant,pot_plant.n.01,,,Maybe movable
+sleeping_furniture,bed,bed.n.01,pet_bed.n.01,receptacle,Receptacle
+bathroom_fixtures,toilet,toilet.n.02,,fixture,
+display,tv,television_receiver.n.01,,,
+support_furniture,table,table.n.02,stand.n.04,receptacle,Receptacle
+support_furniture,stand,stand.n.04,nightstand.n.01,receptacle,Receptacle
+storage_furniture,cabinet,cabinet.n.01,,receptacle,Receptacle
+storage_furniture,counter,"buffet.n.01,kitchen_island.n.01",,receptacle,Receptacle
+lighting,table_lamp,table_lamp.n.01,,moveable,Moveable
+lighting,wall_lamp,wall_lamp.n.01,,fixture,
+lighting,floor_lamp,floor_lamp.n.01,,,
+lighting,ceiling_lamp,ceiling_lamp.n.01,,fixture,
+lighting,pathway_light,pathway_light.n.01,,,
+gym_equipment,treadmill,treadmill.n.01,,,
+gym_equipment,exercise_bike,exercise_bike.n.01,,,
+seating_furniture,stool,stool.n.01,,receptacle,Receptacle
+storage_furniture,chest_of_drawers,chest_of_drawers.n.01,,receptacle,Receptacle
+storage_furniture,filing_cabinet,file.n.03,,,
+bathroom_fixtures,bathtub,bathtub.n.01,,receptacle,Receptacle
+kitchen_bathroom_fixture,sink,sink.n.01,,receptacle,Receptacle
+heating_cooling,fireplace,fireplace.n.01,,fixture,
+floor_covering,carpet,"mat.n.01,rug.n.01,bath_mat.n.01",,,
+decor,cushion,cushion.n.03,,pickupable,pickupable
+decor,picture,wall_art.n.01,,,
+decor,picture_frame,picture_frame.n.01,,pickupable,pickupable
+dining_ware,plate,"plate.n.04,saucer.n.02",,pickupable,pickupable
+dining_ware,bowl,bowl.n.01,,pickupable,pickupable
+liquid_container,bottle,bottle.n.01,,pickupable,pickupable
+liquid_container,pitcher,pitcher.n.01,,pickupable,pickupable
+kitchen_ware,pan,pan.n.01,,pickupable,pickupable
+kitchen_ware,pot,casserole.n.02,,pickupable,pickupable
+kitchen_ware,steamer,steamer.n.01,,pickupable,pickupable
+kitchen_ware,cooker,cooker.n.01,,pickupable,pickupable
+kitchen_ware,mixing_bowl,mixing_bowl.n.01,,pickupable,pickupable
+kitchen_ware,colander,colander.n.01,,pickupable,pickupable
+kitchen_ware,kettle,kettle.n.01,,pickupable,pickupable
+kitchen_ware,teapot,teapot.n.01,,pickupable,pickupable
+kitchen_ware,breadbin,bread-bin.n.01,,pickupable,pickupable
+dining_ware,drinkware,"glass.n.02,cup.n.01",,pickupable,pickupable
+kitchen_ware,spicemill,spicemill.n.01,,pickupable,pickupable
+wearable,eyeglasses,spectacles.n.01,,pickupable,pickupable
+decor,book,book.n.02,,pickupable,pickupable
+decor,vase,vase.n.01,,pickupable,pickupable
+apparel,shoes,shoe.n.01,,pickupable,pickupable
+storage_furniture,shelves,"bookcase.n.01,shelf.n.01,shelving.n.01",,receptacle,Receptacle
+storage_furniture,wardrobe,"armoire.n.01,wardrobe.n.01",,receptacle,Receptacle
+large_kitchen_appliance,range_hood,range_hood.n.01,,fixture,
+large_kitchen_appliance,fridge,refrigerator.n.01,,receptacle,[Future] Receptacle
+large_kitchen_appliance,oven,oven.n.01,,receptacle,[Future] Receptacle
+large_kitchen_appliance,dishwasher,dishwasher.n.01,,receptacle,[Future] Receptacle
+medium_kitchen_appliance,microwave,microwave.n.02,,receptacle,[Future] Receptacle
+large_appliance,washer_dryer,"washer.n.03,dryer.n.01",,receptacle,[Future] Receptacle
+bathroom_fixtures,shower,shower_stall.n.01,,fixture,
+electronics,laptop,laptop.n.01,,movable,movable
+clock,alarm_clock,alarm_clock.n.01,,pickupable,pickupable
+clock,mantel_clock,mantel_clock.n.01,,pickupable,pickupable
+clock,wall_clock,wall_clock.n.01,,,
+clock,grandfather_clock,grandfather_clock.n.01,,,
+electronics,mobile_phone,cellular_telephone.n.01,,pickupable,pickupable
+electronics,phone,telephone.n.01,,,
+small_kitchen_appliance,coffee_maker,coffee_maker.n.01,,moveable,movable
+small_kitchen_appliance,blender,blender.n.01,,moveable,movable
+small_kitchen_appliance,toaster,toaster.n.02,,moveable,movable
+small_kitchen_appliance,kitchen_scale,kitchen_scale.n.01,,moveable,movable
+electronics,earphone,earphone.n.01,,pickupable,Receptacle
+electronics,camera,camera.n.01,,moveable,movable
+electronics,printer,printer.n.03,,,
+decor,candle,candle.n.01,,pickupable,pickupable
+bathroom_accessory,toiletry,toiletry.n.01,b1c12c78c674a37379701887a313581f91a67852,pickupable,pickupable
+bathroom_accessory,soap_dispenser,soap_dispenser.n.01,,pickupable,Receptacle
+trashcan,trashcan,ashcan.n.01,,receptacle,[Future] Receptacle
+mirror,mirror,mirror.n.01,,,
+tray,tray,cafeteria_tray.n.01,,moveable,pickupable
+toy,plush_toy,plush_toy.n.01,,pickupable,pickupable
+curtain,curtain,"window_curtain.n.01,window_blind.n.01,window_shade.n.01",,,
+arch,door,door.n.01,,openable,
+arch,window,window.n.01,,openable,
+animate_object,animal,animal.n.01,,remove,
+animate_object,person,person.n.01,,remove,
+vehicle,car,car.n.01,,,
+vehicle,bicycle,bicycle.n.01,,,
+vehicle,motorcycle,motorcycle.n.01,,,
