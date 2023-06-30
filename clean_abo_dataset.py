@@ -1,6 +1,7 @@
 import os
 import csv
 import json
+import subprocess
 
 def load_csv(csv_file):
     with open(csv_file, 'r') as f:
@@ -65,9 +66,8 @@ def update_configs(config_path, object_ids_to_keep):
         if config_id in object_ids_to_keep:
             with open(config_path + config, "r") as f:
                 config_data = json.load(f)
-
-                config_data["render_asset"] = "../assets/objects/" + config_data["render_asset"].split("/")[-1]
-                config_data["collision_asset"] = "../assets/collision_meshes/" + config_data["collision_asset"].split("/")[-1]
+                config_data["render_asset"] = "../assets/objects/" + config_id + ".glb"
+                config_data["collision_asset"] = "../assets/collision_meshes/" + config_id + ".glb"
 
             with open(config_path + config, "w") as f:
                 json.dump(config_data, f, indent=2)
@@ -81,6 +81,40 @@ def remove_non_basis_files(path):
     objects = os.listdir(path)
     for object in objects:
         os.system("mv " + path + object + " " + path + object.split(".")[0] + ".glb")
+
+def obj_to_glb(asset_path, folder, converter="assimp"):
+    obj_path = asset_path + folder + "/"
+    glb_path = asset_path + folder + "_glb/"
+
+    if not os.path.exists(glb_path):
+        os.makedirs(glb_path)
+
+    for obj_folder in os.listdir(obj_path):
+        obj_file = obj_path + obj_folder
+        if os.path.exists(obj_file):
+            glb_file = glb_path + obj_folder.split('.')[0] + ".glb"
+            convert_object(obj_file, glb_file, converter)
+        else:
+            print("obj file does not exist: ", obj_file)
+
+
+    os.system("rm -r " + obj_path)
+    os.system("mv " + glb_path + " " + obj_path)
+
+def convert_object(from_file, to_file, converter="assimp"):
+    # print to terminal
+    if converter == "assimp":
+        subprocess.call([
+            converter, "export",
+            from_file, to_file
+        ], stdout=subprocess.DEVNULL)
+        assert os.path.exists(to_file), "conversion failed on file {}".format(from_file)
+    elif converter == "obj2gltf":
+        subprocess.call([
+            converter, '-i', from_file, "-o", to_file
+        ])
+        assert os.path.exists(to_file), "conversion failed on file {}".format(from_file)
+
 
 if __name__ == "__main__":
     categories_csv_file = "csv/abo_categories.csv"
@@ -103,10 +137,13 @@ if __name__ == "__main__":
 
     # clean_objects(old_path, new_path, object_ids_to_keep)
 
-    # config_path = "/Users/karmeshyadav/Code/habitat-sim/data/objects/objects/amazon_berkeley/configs/"
+    config_path = "/Users/karmeshyadav/Code/habitat-sim/data/objects/objects/amazon_berkeley/configs/"
     
-    # update_configs(config_path, object_ids_to_keep)
+    update_configs(config_path, object_ids_to_keep)
 
-    objects_path = "/Users/karmeshyadav/Code/habitat-sim/data/objects/objects/amazon_berkeley/assets/objects/"
-    remove_non_basis_files(objects_path)
+    # objects_path = "/Users/karmeshyadav/Code/habitat-sim/data/objects/objects/amazon_berkeley/assets/objects/"
+    # remove_non_basis_files(objects_path)
+
+    asset_path = "/Users/karmeshyadav/Code/habitat-sim/data/objects/objects/amazon_berkeley/assets/"
+    obj_to_glb(asset_path, "collision_meshes", converter="obj2gltf")
 

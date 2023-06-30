@@ -68,28 +68,36 @@ def update_configs(config_path, object_ids_to_keep):
             with open(config_path + config, "w") as f:
                 json.dump(config_data, f, indent=2)
 
-def obj_to_glb(asset_path, folder, original_location, assimp_exec="assimp"):
+def obj_to_glb(asset_path, folder, original_location, converter="assimp"):
     obj_path = asset_path + folder + "/"
     glb_path = asset_path + folder + "_glb/"
+
     if not os.path.exists(glb_path):
         os.makedirs(glb_path)
-    breakpoint()
+
     for obj_folder in os.listdir(obj_path):
         obj_file = obj_path + obj_folder + "/" + original_location
-        glb_file = glb_path + obj_folder + ".glb"
+        if os.path.exists(obj_file):
+            glb_file = glb_path + obj_folder + ".glb"
 
-        convert_object(obj_file, glb_file, assimp_exec)
-    breakpoint()
-    os.system("rm -r " + obj_path)
-    os.system("mv " + glb_path + " " + obj_path)
+            convert_object(obj_file, glb_file, converter)
 
-def convert_object(from_file, to_file, assimp_exec="assimp"):
+    # os.system("rm -r " + obj_path)
+    # os.system("mv " + glb_path + " " + obj_path)
+
+def convert_object(from_file, to_file, converter="assimp"):
     # print to terminal
-    subprocess.call([
-        assimp_exec, "export",
-        from_file, to_file
-    ], stdout=subprocess.DEVNULL)
-    assert os.path.exists(to_file), f"conversion failed on file {from_file}"
+    if converter == "assimp":
+        subprocess.call([
+            converter, "export",
+            from_file, to_file
+        ], stdout=subprocess.DEVNULL)
+        assert os.path.exists(to_file), "conversion failed on file {}".format(from_file)
+    elif converter == "obj2gltf":
+        subprocess.call([
+            converter, '-i', from_file, "-o", to_file
+        ])
+        assert os.path.exists(to_file), "conversion failed on file {}".format(from_file)
 
 if __name__ == "__main__":
     categories_csv_file = "csv/gso_categories.csv"
@@ -112,8 +120,8 @@ if __name__ == "__main__":
 
     # clean_objects(old_path, new_path, object_ids_to_keep)
 
-    # config_path = "/Users/karmeshyadav/Code/habitat-sim/data/objects/objects/google_scanned/configs/"
-    config_path = "/private/home/karmeshyadav/language_rearrangement/object_datasets/google_scanned/configs/"
+    config_path = "/Users/karmeshyadav/Code/habitat-sim/data/objects/objects/google_scanned/configs/"
+    # config_path = "/private/home/karmeshyadav/language_rearrangement/object_datasets/google_scanned/configs/"
     update_configs(config_path, object_ids_to_keep)
 
     # old_path = "/Users/karmeshyadav/Code/habitat-sim/data/objects/google_object_dataset/google_object_dataset.scene_dataset_config.json"
@@ -122,7 +130,8 @@ if __name__ == "__main__":
     # os.system("cp " + old_path + " " + new_path)
 
     # asset_path = "/private/home/karmeshyadav/language_rearrangement/object_datasets/google_scanned/assets/"
-    # obj_to_glb(asset_path, "objects", "meshes/model.obj")
+    # asset_path = "/Users/karmeshyadav/Code/habitat-sim/data/objects/objects/google_scanned/assets/"
+    # obj_to_glb(asset_path, "objects", "meshes/model.obj", converter="obj2gltf")
 
-    asset_path = "/private/home/karmeshyadav/language_rearrangement/object_datasets/google_scanned/assets/"
-    obj_to_glb(asset_path, "collision_meshes", "model.obj")
+    # asset_path = "/private/home/karmeshyadav/language_rearrangement/object_datasets/google_scanned/assets/"
+    # obj_to_glb(asset_path, "collision_meshes", "model.obj")
